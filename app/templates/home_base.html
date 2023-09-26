@@ -28,6 +28,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<link href="//fonts.googleapis.com/css?family=Inconsolata:400,700" rel="stylesheet">
 	<link href="//fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800"
 	    rel="stylesheet">
+
+
 </head>
 
 <body>
@@ -404,7 +406,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		});
 	</script>
 	<!-- // modal -->
-
+	<script src="{% static 'core/home/js/function.js' %}"></script>
 	<!--search jQuery-->
 	<script src="{% static 'core/home/js/modernizr-2.6.2.min.js' %}"></script>
 	<script src="{% static 'core/home/js/classie-search.js' %}"></script>
@@ -441,16 +443,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	</script>
 	<!-- carousel -->
 	<!-- Count-down -->
-	<script src="{% static 'core/home/js/simplyCountdown.js' %}"></script>
-	<link href="{% static 'core/home/css/simplyCountdown.css' %}" rel='stylesheet' type='text/css' />
 	<script>
-		var d = new Date();
-		simplyCountdown('simply-countdown-custom', {
-			year: d.getFullYear(),
-			month: d.getMonth() + 2,
-			day: 25
-		});
+		$(document).ready(function(){
+
+			var quantity=0;
+			   $('.quantity-right-plus').click(function(e){
+
+					// Stop acting like a button
+					e.preventDefault();
+					// Get the field name
+					var quantity = parseInt($('#quantity').val());
+
+					// If is not undefined
+
+						$('#quantity').val(quantity + 1);
+
+
+						// Increment
+
+				});
+
+				 $('.quantity-left-minus').click(function(e){
+					// Stop acting like a button
+					e.preventDefault();
+					// Get the field name
+					var quantity = parseInt($('#quantity').val());
+
+					// If is not undefined
+
+						// Increment
+						if(quantity>0){
+						$('#quantity').val(quantity - 1);
+						}
+				});
+
+			});
 	</script>
+
 	<!--// Count-down -->
 	<script src="{% static 'core/home/js/owl.carousel.js' %}"></script>
 	<script>
@@ -535,6 +564,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<script src="{% static 'core/home/js/bootstrap.js' %}"></script>
 	<!-- js file -->
+
 </body>
 
 </html>

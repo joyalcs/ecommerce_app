@@ -15,13 +15,7 @@ STATUS_CHOICE = (
     ("shipped", "Shipped"),
     ("delivered", "Delivered"),
 )
-RATING = (
-    (1, "★☆☆☆☆"),
-    (2, "★★☆☆☆"),
-    (3, "★★★☆☆"),
-    (4, "★★★★☆"),
-    (5, "★★★★★"),
-)
+
 def user_directory_path(instance, filename):
     return f'user_{0}/{1}'.format(instance.user.id, filename)
 
@@ -92,7 +86,7 @@ class Product(models.Model):
 
 class ProductImages(models.Model):
     images = models.ImageField(upload_to="product-images")
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, related_name="p_images", on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -129,7 +123,6 @@ class ProductReview(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     review = models.TextField(max_length=400)
-    rating = models.CharField(choices=RATING, max_length=100)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
