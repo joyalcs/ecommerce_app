@@ -1,0 +1,72 @@
+
+    <!-- /womens -->
+    {%for item in products%}
+    <div class="col-md-3 product-men women_two shop-gd">
+        <div class="product-googles-info googles">
+            <div class="men-pro-item">
+                <div class="men-thumb-item">
+                    <img src="{{item.image.url}}" class="img-fluid" alt="">
+                    <div class="men-cart-pro">
+                        <div class="inner-men-cart-pro">
+                            <a href="{%url 'core:single-product' item.pid %}" class="link-product-add-cart">Quick View</a>
+                        </div>
+                    </div>
+                    <span class="product-new-top">{{item.get_percentage| floatformat}}% off</span>
+                </div>
+                <div class="item-info-product">
+                    <div class="info-product-price">
+                        <div class="grid_meta">
+                            <div class="product_price">
+                                <h4>
+                                    <a href="{%url 'core:single-product' item.pid %}">{{item.title}}</a>
+                                </h4>
+                                <div class="grid-price mt-2">
+                                    <span class="money product-price-{{item.pid}}">{{item.price}}</span>
+                                </div>
+                            </div>
+                            <ul class="stars">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="googles single-item hvr-outline-out">
+                            <input type="hidden" name="" value="1" class="product-qty-{{item.pid}}">
+                            <input type="hidden" name="add" value="{{item.pid}}" class="product-id-{{item.pid}}">
+                            <input type="hidden" name="googles_item" value="{{item.title}}" class="product-title-{{item.pid}}" >
+                            <input type="hidden" name="amount" value="{{item.price}}" class="product-price-{{item.pid}}">
+                            <input type="hidden" name="image" value="{{item.image.url}}" class="product-image-{{item.pid}}">
+                            <button id="" type="submit" data-index="{{item.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                    </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+

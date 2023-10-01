@@ -4,7 +4,7 @@
 <section class="banner-bottom-wthreelayouts py-lg-5 py-3">
     <div class="container-fluid">
         <div class="inner-sec-shop px-lg-4 px-3">
-            <h3 class="tittle-w3layouts my-lg-4 my-4">{{category.title}} </h3>
+            <h3 class="tittle-w3layouts my-lg-4 my-4">{{query}} </h3>
             <div class="row mt-lg-3 mt-0">
                 <!-- /womens -->
                 {% for field in products %}
@@ -61,12 +61,12 @@
                                         </ul>
                                     </div>
                                     <div class="googles single-item hvr-outline-out">
-                                        <input type="hidden" name="" value="1" class="product-qty-{{field.pid}}">
-                                        <input type="hidden" name="add" value="{{field.pid}}" class="product-id-{{field.pid}}">
-                                        <input type="hidden" name="googles_item" value="{{field.title}}" class="product-title-{{field.pid}}" >
-                                        <input type="hidden" name="amount" value="{{field.price}}" class="product-price-{{field.pid}}">
-                                        <input type="hidden" name="image" value="{{field.image.url}}" class="product-image-{{field.pid}}">
-                                        <button id="" type="submit" data-index="{{field.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
+                                        <input type="hidden" name="" value="1" class="product-qty-{{item.pid}}">
+                                        <input type="hidden" name="add" value="{{item.pid}}" class="product-id-{{item.pid}}">
+                                        <input type="hidden" name="googles_item" value="{{item.title}}" class="product-title-{{item.pid}}" >
+                                        <input type="hidden" name="amount" value="{{item.price}}" class="product-price-{{item.pid}}">
+                                        <input type="hidden" name="image" value="{{item.image.url}}" class="product-image-{{item.pid}}">
+                                        <button id="" type="submit" data-index="{{item.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
                                             <i class="fas fa-cart-plus"></i>
                                         </button>
                                 </div>

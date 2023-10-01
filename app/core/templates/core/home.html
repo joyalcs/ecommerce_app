@@ -16,7 +16,7 @@
 							<h3>Men’s eyewear
 								<span>Cool summer sale 50% off</span>
 							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
+							<a href="{%url 'core:product-list'%}" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
 						</div>
 					</div>
 					<div class="carousel-item item2">
@@ -24,7 +24,7 @@
 							<h3>Women’s eyewear
 								<span>Want to Look Your Best?</span>
 							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
+							<a href="{%url 'core:product-list'%}" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
 
 						</div>
 					</div>
@@ -33,7 +33,7 @@
 							<h3>Men’s eyewear
 								<span>Cool summer sale 50% off</span>
 							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
+							<a href="{%url 'core:product-list'%}" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
 
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 							<h3>Women’s eyewear
 								<span>Want to Look Your Best?</span>
 							</h3>
-							<a href="shop.html" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
+							<a href="{%url 'core:product-list'%}" class="btn btn-sm animated-button gibson-three mt-4">Shop Now</a>
 						</div>
 					</div>
 				</div>
@@ -119,7 +119,7 @@
 													<a href="single.html">{{field.title}} </a>
 												</h4>
 												<div class="grid-price mt-2">
-													<span class="money ">{{field.price}}</span>
+													<span class="money  product-price-{{field.pid}}">{{field.price}}</span>
 												</div>
 											</div>
 											<ul class="stars">
@@ -151,18 +151,15 @@
 											</ul>
 										</div>
 										<div class="googles single-item hvr-outline-out">
-											<form action="#" method="post">
-												<input type="hidden" name="cmd" value="_cart">
-												<input type="hidden" name="add" value="1">
-												<input type="hidden" name="googles_item" value="Aislin Wayfarer">
-												<input type="hidden" name="amount" value="775.00">
-												<button type="submit" class="googles-cart pgoogles-cart">
-													<i class="fas fa-cart-plus"></i>
-												</button>
-
-											</form>
-
-										</div>
+											<input type="hidden" name="" value="1" class="product-qty-{{field.pid}}">
+											<input type="hidden" name="add" value="{{field.pid}}" class="product-id-{{field.pid}}">
+											<input type="hidden" name="googles_item" value="{{field.title}}" class="product-title-{{field.pid}}" >
+											<input type="hidden" name="amount" value="{{field.price}}" class="product-price-{{field.pid}}">
+											<input type="hidden" name="image" value="{{field.image.url}}" class="product-image-{{field.pid}}">
+											<button id="" type="submit" data-index="{{field.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
+												<i class="fas fa-cart-plus"></i>
+											</button>
+									</div>
 									</div>
 									<div class="clearfix"></div>
 								</div>

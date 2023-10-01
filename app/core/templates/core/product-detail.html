@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-lg-8 single-right-left simpleCart_shelfItem">
                             <h3>{{product.title}}</h3>
-                            <p><span class="item_price">{{product.price}}</span>
+                            <p><span id="product-price" class="item_price product-price-{{product.pid}}">{{product.price}}</span>
                                 <del>{{product.old_price}}</del>
                             </p>
                             <div class="rating1">
@@ -34,24 +34,28 @@
                             <div class="description">
                                 <h5>{{product.specifications}}</h5>
                             </div>
-                            <div class="occasion-cart">
-                                    <div class="googles single-item singlepage">
-                                            <form action="#" method="post">
-                                                {% csrf_token %}
-                                                <input type="hidden" name="cmd" value="_cart">
-                                                <input type="hidden" name="add" value="1">
-                                                <input type="hidden" name="googles_item" value="Farenheit">
-                                                <input type="hidden" name="amount" value="575.00">
-                                                <button type="submit" class="googles-cart pgoogles-cart">
-                                                    Add to Cart
-                                                </button>
-
-                                            </form>
-
-                                        </div>
+                            <div class="color-quality">
+                                <div class="color-quality-right">
+                                    <h5>Quantity :</h5>
+                                    <div class="input-group w-auto justify-content-start align-items-start">
+                                        <input type="button" value="-" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 " data-field="quantity">
+                                        <input type="number" id="product-qty" step="1" max="10" value="1" name="quantity" class="quantity-field border-0 text-center w-auto product-qty-{{product.pid}}">
+                                        <input type="button" value="+" class="button-plus border rounded-circle icon-shape icon-sm mx-1 " data-field="quantity">
+                                    </div>
+                                </div>
                             </div>
-
+                            <div class="googles single-item hvr-outline-out">
+                                {% comment %} <input type="hidden" name="" value="1" class="product-qty-{{product.pid}}"> {% endcomment %}
+                                <input type="hidden" name="add" value="{{product.pid}}" class="product-id-{{product.pid}}">
+                                <input type="hidden" name="googles_item" value="{{product.title}}" class="product-title-{{product.pid}}" >
+                                <input type="hidden" name="amount" value="{{product.price}}" class="product-price-{{product.pid}}">
+                                <input type="hidden" name="image" value="{{product.image.url}}" class="product-image-{{product.pid}}">
+                                <button id="" type="submit" data-index="{{product.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
+                                    <i class="fas fa-cart-plus"></i>
+                                </button>
                         </div>
+
+                    </div>
                         <div class="clearfix"> </div>
                         <div class="single_page">
                             <h4 class="tittle-w3layouts text-left my-lg-4 my-3">Reviews</h4>
@@ -121,50 +125,21 @@
                                                         <h4>
                                                             <a href="{%url 'core:single-product' item.pid %}">{{item.title}}</a>
                                                         </h4>
-                                                        <div class="grid-price mt-2">
-                                                            <span class="money ">{{item.price}}</span>
+                                                        <div class="grid-price product_price mt-2">
+                                                            <span class="money product_price">{{item.price}}</span>
                                                         </div>
                                                     </div>
-                                                    <ul class="stars">
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="#">
-                                                                <i class="fa fa-star-o" aria-hidden="true"></i>
-                                                            </a>
-                                                        </li>
-                                                    </ul>
                                                 </div>
                                                 <div class="googles single-item hvr-outline-out">
-                                                    <form action="#" method="post">
-                                                        <input type="hidden" name="cmd" value="_cart">
-                                                        <input type="hidden" name="add" value="1">
-                                                        <input type="hidden" name="googles_item" value="Fastrack Aviator">
-                                                        <input type="hidden" name="amount" value="325.00">
-                                                        <button type="submit" class="googles-cart pgoogles-cart">
-                                                            <i class="fas fa-cart-plus"></i>
-                                                        </button>
-                                                    </form>
-
-                                                </div>
+                                                    <input type="hidden" name="" value="1" class="product-qty-{{item.pid}}">
+                                                    <input type="hidden" name="add" value="{{item.pid}}" class="product-id-{{item.pid}}">
+                                                    <input type="hidden" name="googles_item" value="{{item.title}}" class="product-title-{{item.pid}}" >
+                                                    <input type="hidden" name="amount" value="{{item.price}}" class="product-price-{{item.pid}}">
+                                                    <input type="hidden" name="image" value="{{item.image.url}}" class="product-image-{{item.pid}}">
+                                                    <button id="" type="submit" data-index="{{item.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
+                                                        <i class="fas fa-cart-plus"></i>
+                                                    </button>
+                                            </div>
                                             </div>
 
                                         </div>

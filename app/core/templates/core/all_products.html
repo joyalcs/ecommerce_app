@@ -11,38 +11,36 @@
                 <div class="side-bar col-lg-3">
                     <div class="search-hotel">
                         <h3 class="agileits-sear-head">Search Here..</h3>
-                        <form action="#" method="post">
-                                <input class="form-control" type="search" name="search" placeholder="Search here..." required="">
-                                <button class="btn1">
+                        <form action="{%url 'core:search'%}" method="GET">
+                            {% csrf_token %}
+                                <input class="form-control" type="search" name="q" placeholder="Search here..." required="">
+                                <button class="btn1" type="submit">
                                         <i class="fas fa-search"></i>
                                 </button>
                                 <div class="clearfix"> </div>
                             </form>
                     </div>
                     <!-- price range -->
-                    <div class="range">
-                        <h3 class="agileits-sear-head">Price range</h3>
-                        <ul class="dropdown-menu6">
-                            <li>
-
-                                <div id="slider-range"></div>
-                                <input type="text" id="amount" style="border: 0; color: #ffffff; font-weight: normal;" />
-                            </li>
-                        </ul>
+                    <div class="range-slider">
+                        <span class="p-5">
+                            <input type="number" min="{{min_max_price.price__min}}" max="{{min_max_price.price__max}}" id="min_price" placeholder="From:{{min_max_price.price__min}}" onkeyup="range1.value=this.value"/>
+                            <input class="mx-6" type="number"  min="{{min_max_price.price__min}}" max="{{min_max_price.price__max}}" id="max_price" placeholder="To:{{min_max_price.price__max}}" onkeyup="range2.value=this.value"/>
+                        </span>
+                        <input min="{{min_max_price.price__min}}" max="{{min_max_price.price__max}}" step="100" type="range" id="range1" oninput="min_price.value=this.value"/>
+                        <input  min="{{min_max_price.price__min}}" max="{{min_max_price.price__max}}" step="100" type="range" id="range2" oninput="max_price.value=this.value"/>
+                        {% comment %} <button type="button" class="btn btn-secondary" id="filter-btn">Filter</button> {% endcomment %}
                     </div>
                     <!-- //price range -->
                     <!--preference -->
                     <div class="left-side">
                         <h3 class="agileits-sear-head">Deal Offer On</h3>
                         <ul>
+                            {%for category in categories%}
                             <li>
-                                <input type="checkbox" class="checked">
-                                <span class="span">Backpack</span>
+                                <input class="filter-checkbox" type="checkbox" class="checked" data-filter="category" value="{{category.id}}">
+                                <span class="span">{{category.title}}</span>
                             </li>
-                            <li>
-                                <input type="checkbox" class="checked">
-                                <span class="span">Phone Pocket</span>
-                            </li>
+                            {% endfor %}
 
                         </ul>
                     </div>
@@ -196,7 +194,7 @@
                                     </div>
 
                         </div>
-                        <div class="row">
+                        <div class="row" id="filtered-products">
                             <!-- /womens -->
                             {%for item in products%}
                             <div class="col-md-3 product-men women_two shop-gd">
@@ -219,7 +217,7 @@
                                                             <a href="{%url 'core:single-product' item.pid %}">{{item.title}}</a>
                                                         </h4>
                                                         <div class="grid-price mt-2">
-                                                            <span class="money ">{{item.price}}</span>
+                                                            <span class="money product-price-{{item.pid}}">{{item.price}}</span>
                                                         </div>
                                                     </div>
                                                     <ul class="stars">
@@ -251,16 +249,14 @@
                                                     </ul>
                                                 </div>
                                                 <div class="googles single-item hvr-outline-out">
-                                                    <form action="#" method="post">
-                                                        <input type="hidden" name="cmd" value="_cart">
-                                                        <input type="hidden" name="add" value="1">
-                                                        <input type="hidden" name="googles_item" value="Farenheit">
-                                                        <input type="hidden" name="amount" value="575.00">
-                                                        <button type="submit" class="googles-cart pgoogles-cart">
+                                                        <input type="hidden" name="" value="1" class="product-qty-{{item.pid}}">
+                                                        <input type="hidden" name="add" value="{{item.pid}}" class="product-id-{{item.pid}}">
+                                                        <input type="hidden" name="googles_item" value="{{item.title}}" class="product-title-{{item.pid}}" >
+                                                        <input type="hidden" name="amount" value="{{item.price}}" class="product-price-{{item.pid}}">
+                                                        <input type="hidden" name="image" value="{{item.image.url}}" class="product-image-{{item.pid}}">
+                                                        <button id="" type="submit" data-index="{{item.pid}}" class="googles-cart pgoogles-cart add-to-cart-button">
                                                             <i class="fas fa-cart-plus"></i>
                                                         </button>
-                                                    </form>
-
                                                 </div>
                                             </div>
                                             <div class="clearfix"></div>
@@ -288,7 +284,7 @@
                                                 <img src="images/s5.jpg" class="img-fluid" alt="">
                                                 <div class="men-cart-pro">
                                                     <div class="inner-men-cart-pro">
-                                                        <a href="single.html" class="link-product-add-cart">Quick View</a>
+                                                      <a href="single.html" class="link-product-add-cart">Quick View</a>
                                                     </div>
                                                 </div>
                                                 <span class="product-new-top">New</span>

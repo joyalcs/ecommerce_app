@@ -18,6 +18,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		}
 	</script>
 	<link href="{% static 'core/home/css/bootstrap.css' %}" rel='stylesheet' type='text/css' />
+	<link href="{% static 'core/home/css/checkout.css' %}" rel='stylesheet' type='text/css' />
 	<link href="{% static 'core/home/css/login_overlay.css' %}" rel='stylesheet' type='text/css' />
 	<link href="{% static 'core/home/css/style6.css' %}" rel='stylesheet' type='text/css' />
 	<link rel="stylesheet" href="{% static 'core/home/css/shop.css' %}" type="text/css" />
@@ -59,21 +60,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<form action="#" method="post" class="last">
 								<input type="hidden" name="cmd" value="_cart">
 								<input type="hidden" name="display" value="1">
-								<button class="top_googles_cart" type="submit" name="submit" value="">
-									My Cart
+								<div class="top_googles_cart" type="submit" name="submit" value="">
+									<a class="cart-item-count" href="{% url 'core:cart-items' %}">My Cart({{request.session.cart_data_obj|length}})</a>
 									<i class="fas fa-cart-arrow-down"></i>
-								</button>
+								</div>
 							</form>
 						</li>
                         <li class="galssescart galssescart2 cart cart box_1">
-							<form action="#" method="post" class="last">
+
 								<input type="hidden" name="cmd" value="_cart">
 								<input type="hidden" name="display" value="1">
 								<button class="top_googles_cart" type="submit" name="submit" value="">
 									Wishlist
 									<i class="fas fa-cart-arrow-down"></i>
 								</button>
-							</form>
+
 						</li>
                         <li class="galssescart galssescart2 cart cart box_1">
                             <input type="hidden" name="cmd" value="_cart">
@@ -413,6 +414,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<script src="{% static 'core/home/js/demo1-search.js' %}"></script>
 	<!--//search jQuery-->
 	<!-- cart-js -->
+	<script>
+		function incrementValue(e) {
+			e.preventDefault();
+			var fieldName = $(e.target).data('field');
+			var parent = $(e.target).closest('div');
+			var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+			if (!isNaN(currentVal)) {
+				parent.find('input[name=' + fieldName + ']').val(currentVal + 1);
+			} else {
+				parent.find('input[name=' + fieldName + ']').val(0);
+			}
+		}
+
+		function decrementValue(e) {
+			e.preventDefault();
+			var fieldName = $(e.target).data('field');
+			var parent = $(e.target).closest('div');
+			var currentVal = parseInt(parent.find('input[name=' + fieldName + ']').val(), 10);
+
+			if (!isNaN(currentVal) && currentVal > 0) {
+				parent.find('input[name=' + fieldName + ']').val(currentVal - 1);
+			} else {
+				parent.find('input[name=' + fieldName + ']').val(0);
+			}
+		}
+
+		$('.input-group').on('click', '.button-plus', function(e) {
+			incrementValue(e);
+		});
+
+		$('.input-group').on('click', '.button-minus', function(e) {
+			decrementValue(e);
+		});
+
+	</script>
 	<script src="{% static 'core/home/js/minicart.js' %}"></script>
 	<script>
 		googles.render();
@@ -457,8 +494,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					// If is not undefined
 
 						$('#quantity').val(quantity + 1);
-
-
 						// Increment
 
 				});

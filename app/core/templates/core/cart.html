@@ -1,0 +1,80 @@
+{% extends "home_base.html" %}
+{% load static %}
+{% block content %}
+	<!--checkout-->
+	<section id="cart-products" class="banner-bottom-wthreelayouts py-lg-5 py-3">
+		<div class="container">
+			<div class="inner-sec-shop px-lg-4 px-3">
+				<h3 class="tittle-w3layouts my-lg-4 mt-3">Cart </h3>
+				<div class="checkout-right">
+					<h4>Your shopping cart contains:
+						<span>{{totalcartitems}} Products</span>
+					</h4>
+					<table class="timetable_sub">
+						<thead>
+							<tr>
+								<th>SL No.</th>
+								<th>Product</th>
+								<th>Quantity</th>
+								<th>Product Name</th>
+
+								<th>Price</th>
+                                <th>Total</th>
+								<th>Remove</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for product_id, item in data.items %}
+							<tr class="rem1">
+								<td class="invert">{{item.qty}}</td>
+								<td class="invert-image">
+									<a href="{% url "core:single-product" product_id%}">
+										<img src="{{item.image}}" alt=" " class="img-responsive">
+									</a>
+								</td>
+								<td class="invert">
+									<div class="quantity">
+										<div class="quantity-select">
+											<div class="entry value">
+												<span>{{item.qty}}</span>
+											</div>
+											{% comment %} <div class="entry value-plus active">&nbsp;</div> {% endcomment %}
+										</div>
+									</div>
+								</td>
+								<td class="invert">{{item.title}}</td>
+
+								<td class="invert">Rs.{{item.price}}</td>
+                                <td class="invert">Rs.{% widthratio item.price 1 item.qty%}</td>
+								<td class="invert">
+									<div class="rem">
+										<button class="close1 delete-product" style="border:None;" data-product="{{product_id}}"></button>
+									</div>
+
+								</td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="checkout-left row">
+					<div class="col-md-4 checkout-left-basket">
+						<h4>Continue to basket</h4>
+						<ul>
+							<li>Total Service Charges
+								<i>-</i>
+								<span>Rs 0</span>
+							</li>
+							<li>Total
+								<i>-</i>
+								<span>{{cart_total_price}}</span>
+							</li>
+						</ul>
+					</div>
+
+
+    </div>
+</section>
+	<!--//checkout-->
+{% endblock content %}
+
